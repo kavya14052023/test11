@@ -1,35 +1,34 @@
-pipeline{
+pipeline {
     agent any
     stages {
-        stage ('BUILD') {
-            steps{
-                echo "this is build stage"
-                sh 'sleep 5'
-            }
-        }
-        stage (TEST PARALLEL) {
-            parallel {
-                stage ('test on chrome') {
-                    steps {
-                        echo "this is test on chrome browser"
-                        sh 'ls -lrt'
-                    }
-                }
-                stage ('test on safari') {
-                    steps {
-                        echo "this is test on safari browser"
-                        sh 'sleep 3'
-                    }
-                }
-            }
-        }
-        stage ('deploy') {
+        stage('Build') {
             steps {
-                echo "this is deploy stage"
-                sh 'sleep 3'
+                sh 'echo "Building the application"'
+                // Add commands to build application
             }
-        }        
-        
-           
+        }
+        stage('Test') {
+            parallel {
+                stage('Unit Tests') {
+                    steps {
+                        sh 'sleep 5s'
+                        sh 'echo "Running unit tests"'
+                        // Add commands to run unit tests
+                    }
+                }
+                stage('Integration Tests') {
+                    steps {
+                        sh 'echo "Running integration tests"'
+                        // Add commands to run integration tests
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo "Deploying the application"'
+                // Add commands to deploy application
+            }
+        }
     }
 }
