@@ -1,30 +1,35 @@
-pipeline {
-  agent any	
-  stages {
-
-    stage ('BUILD') {
-      steps {
-        echo "This is Build stage" 
-        sh ''' 
-		sleep 5
-	        exit 0 
-	   '''
-      }  
-    }  
-    
-    stage ('TEST') {
-      steps {
-        echo "This is Test stage" 
-        sh 'sleep 5'
-      }  
-    }  
-    
-    stage ('DEPLOY') {
-      steps {
-        echo "This is Deploy stage" 
-        sh 'sleep 5'
-      }  
-    }  
-  } 
-
+pipeline{
+    agent any
+    stages {
+        stage ('BUILD') {
+            steps{
+                echo "this is build stage"
+                sh 'sleep 5'
+            }
+        }
+        stage (TEST PARALLEL) {
+            parallel {
+                stage ('test on chrome') {
+                    steps {
+                        echo "this is test on chrome browser"
+                        sh 'ls -lrt'
+                    }
+                }
+                stage ('test on safari') {
+                    steps {
+                        echo "this is test on safari browser"
+                        sh 'sleep 3'
+                    }
+                }
+            }
+        }
+        stage ('deploy') {
+            steps {
+                echo "this is deploy stage"
+                sh 'sleep 3'
+            }
+        }        
+        
+           
+    }
 }
