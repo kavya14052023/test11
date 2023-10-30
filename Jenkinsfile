@@ -1,34 +1,31 @@
 pipeline {
-    agent any
+    agents any
     stages {
-        stage('Build') {
+
+        stage ('BUILD') {
             steps {
-                sh 'echo "Building the application"'
-                // Add commands to build application
+                echo "this is build stage"
+                sh '''
+                       sleep 5
+                       exit 0
+                   '''
             }
         }
-        stage('Test') {
-            parallel {
-                stage('Unit Tests') {
-                    steps {
-                        sh 'sleep 5s'
-                        sh 'echo "Running unit tests"'
-                        // Add commands to run unit tests
-                    }
-                }
-                stage('Integration Tests') {
-                    steps {
-                        sh 'echo "Running integration tests"'
-                        // Add commands to run integration tests
-                    }
-                }
-            }
-        }
-        stage('Deploy') {
+
+        stage ('TEST') {
             steps {
-                sh 'echo "Deploying the application"'
-                // Add commands to deploy application
+                echo "this is test stage"
+                sh 'sleep 3; exit 0'
+
             }
         }
+
+        stage ('DEPLOY') {
+            steps {
+                echo "this is deploy stage"
+                sh 'sleep 2'
+            }
+        }
+
     }
 }
