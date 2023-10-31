@@ -19,14 +19,14 @@ pipeline {
                     }
                 }
 
-                stage ('TEST ON MOZILLA) {
+                stage ('TEST ON MOZILLA') {
                     steps {
                         echo "this is test 02"
                         sh 'sleep 5'
                     }
                 }
 
-                stage ('TEST ON FIREFOX) {
+                stage ('TEST ON FIREFOX') {
                     steps {
                         echo "this is test 03"
                         sh 'sleep 2'
