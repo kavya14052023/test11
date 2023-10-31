@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages {
 
-        stage (build) {
+        stage ('BUILD') {
             steps {
                 echo "this is build stage"
                 sh 'sleep 5'
@@ -12,21 +12,21 @@ pipeline {
 
         stage ('TEST PARALLEL') {
             parallel {
-                stage (test 01) {
+                stage ('TEST ON CHROME') {
                     steps {
                         echo "this test 01"
                         sh 'ps -ef'
                     }
                 }
 
-                stage (test 02) {
+                stage ('TEST ON MOZILLA) {
                     steps {
                         echo "this is test 02"
                         sh 'sleep 5'
                     }
                 }
 
-                stage (test 03) {
+                stage ('TEST ON FIREFOX) {
                     steps {
                         echo "this is test 03"
                         sh 'sleep 2'
@@ -35,7 +35,7 @@ pipeline {
             }
         }
 
-        stage (deploy) {
+        stage ('DEPLOY') {
             steps {
                 echo "this is deploy stage"
                 sh 'sleep 2'
