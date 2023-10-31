@@ -1,31 +1,37 @@
 pipeline {
-    agents any
+    agent any
     stages {
 
-        stage ('BUILD') {
-            steps {
-                echo "this is build stage"
-                sh '''
-                       sleep 5
-                       exit 0
-                   '''
+        stage (parallel build) {
+            paralle {
+                stage (build 01) {
+                    steps {
+                        echo "this is build 01 stage"
+                        sh 'ps -ef'
+                    }
+                }
+
+                stage (build 02) {
+                    steps {
+                        echo "this is build 02 stage"
+                        sh 'sleep 5'
+                    }
+                }
             }
         }
 
-        stage ('TEST') {
-            steps {
-                echo "this is test stage"
-                sh 'sleep 3; exit 0'
-
-            }
-        }
-
-        stage ('DEPLOY') {
+        stage (deploy) {
             steps {
                 echo "this is deploy stage"
-                sh 'sleep 2'
+                sh 'sleep 5'
             }
         }
 
+        stage (test) {
+            steps {
+                echo "this is test stage"
+                sh 'sleep 10'
+            }
+        }
     }
 }
