@@ -10,7 +10,7 @@ pipeline {
             }
         }
 
-        stage (test parallel) {
+        stage ('TEST PARALLEL') {
             parallel {
                 stage (test 01) {
                     steps {
