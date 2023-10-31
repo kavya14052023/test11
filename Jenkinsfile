@@ -2,16 +2,16 @@ pipeline {
     agent any
     stages {
 
-        stage (parallel build) {
-            paralle {
-                stage (build 01) {
+        stage ('BUILD PARALLEL') {
+            parallel {
+                stage ('BUILD01') {
                     steps {
                         echo "this is build 01 stage"
                         sh 'ps -ef'
                     }
                 }
 
-                stage (build 02) {
+                stage ('BUILD02') {
                     steps {
                         echo "this is build 02 stage"
                         sh 'sleep 5'
