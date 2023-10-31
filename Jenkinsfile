@@ -12,7 +12,7 @@ pipeline {
 
         stage ('TEST PARALLEL') {
             parallel {
-                stage ('TEST ON CHROME') {
+                stage ('TEST ON BRAVE') {
                     steps {
                         echo "this test 01"
                         sh 'ps -ef'
